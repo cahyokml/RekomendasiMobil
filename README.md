@@ -1,58 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Rekomendasi Pemilihan Mobil Berbasis Knowledge-Based Constraints
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Tentang Proyek
 
-## About Laravel
+Sistem Rekomendasi Pemilihan Mobil merupakan aplikasi berbasis web yang dikembangkan sebagai bagian dari skripsi Program Studi Informatika. Aplikasi ini membantu pengguna menemukan mobil yang sesuai dengan kebutuhan dan preferensi mereka menggunakan pendekatan _Knowledge-Based_.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistem menerapkan metode **Constraint-Based Filtering** untuk menyaring alternatif mobil dan **Similarity Scoring** untuk menghitung tingkat kesesuaian serta mengurutkan rekomendasi berdasarkan preferensi pengguna.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Kriteria pemilihan meliputi harga target, kapasitas mesin minimum, jenis bahan bakar, dan jumlah kursi minimum.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fitur Utama
 
-## Learning Laravel
+- **Pemilihan Kriteria Mobil:** Menentukan preferensi berdasarkan harga, kapasitas mesin, jenis bahan bakar, dan jumlah kursi.
+- **Constraint-Based Filtering:** Menyaring mobil yang memenuhi kriteria pengguna.
+- **Similarity Scoring:** Menghitung skor kemiripan berdasarkan kesesuaian spesifikasi mobil dengan preferensi pengguna.
+- **Peringkat Rekomendasi:** Mengurutkan alternatif mobil berdasarkan skor kemiripan.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Metode Rekomendasi
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Constraint-Based Filtering
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Metode ini digunakan untuk menyaring data mobil berdasarkan batasan yang ditentukan pengguna. Mobil yang tidak memenuhi kriteria yang dipersyaratkan akan dikeluarkan dari kandidat rekomendasi.
 
-## Agentic Development
+### 2. Similarity Scoring
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Metode ini digunakan untuk mengukur kesesuaian mobil dengan preferensi pengguna. Skor kemiripan yang dihasilkan digunakan untuk mengurutkan kandidat mobil yang memenuhi batasan.
 
-```bash
-composer require laravel/boost --dev
+## Teknologi yang Digunakan
 
-php artisan boost:install
-```
+- **Bahasa Pemrograman:** PHP
+- **Framework:** Laravel
+- **Basis Data:** MySQL
+- **Metode Rekomendasi:** Constraint-Based Filtering dan Similarity Scoring
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Dataset
 
-## Contributing
+Dataset berisi informasi spesifikasi mobil yang digunakan dalam proses rekomendasi, meliputi:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Merek mobil
+- Nama atau model mobil
+- Kapasitas mesin
+- Harga
+- Jenis bahan bakar
+- Jumlah kursi
 
-## Code of Conduct
+## Pengujian dan Evaluasi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Pengujian sistem dilakukan melalui dua tahap:
 
-## Security Vulnerabilities
+- **Alpha Testing:** Untuk memvalidasi fungsionalitas sistem.
+- **Beta Testing:** Untuk mengevaluasi usability sistem dengan melibatkan 20 responden.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Hasil evaluasi beta testing memperoleh skor usability sebesar **89%**, yang dikategorikan sebagai sangat baik.
 
-## License
+## Cara Menjalankan Proyek
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Prasyarat
+
+Pastikan perangkat telah memiliki:
+
+- PHP dengan versi yang sesuai dengan proyek
+- Composer
+- MySQL
+- Git
+
+### Langkah Instalasi
+
+1. Kloning repositori:
+
+    ```bash
+    git clone https://github.com/cahyokml/RekomendasiMobil.git
+    ```
+
+2. Masuk ke direktori proyek:
+
+    ```bash
+    cd RekomendasiMobil
+    ```
+
+3. Instal dependensi:
+
+    ```bash
+    composer install
+    ```
+
+4. Salin file `.env.example` menjadi `.env`.
+
+5. Buat database MySQL dan sesuaikan konfigurasi koneksi database pada file `.env`.
+
+6. Buat application key:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+7. Siapkan struktur database dan data mobil sesuai dengan konfigurasi proyek.
+
+8. Jalankan aplikasi:
+
+    ```bash
+    php artisan serve
+    ```
+
+9. Buka aplikasi melalui browser:
+
+    ```text
+    http://127.0.0.1:8000
+    ```
+
+**Catatan:** Langkah instalasi perlu disesuaikan dengan file konfigurasi, migrasi, dan sumber data yang tersedia di repositori.
+
+## Pengembang
+
+Proyek skripsi Program Studi Informatika.
+
+**Repositori GitHub:** [RekomendasiMobil](https://github.com/cahyokml/RekomendasiMobil)
