@@ -117,5 +117,3 @@ Pastikan perangkat telah memiliki:
 ## Pengembang
 
 Proyek skripsi Program Studi Informatika.
-
-**Repositori GitHub:** [RekomendasiMobil](https://github.com/cahyokml/RekomendasiMobil)
