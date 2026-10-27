@@ -1,5 +1,10 @@
 # Sistem Rekomendasi Pemilihan Mobil Berbasis Knowledge-Based Constraints
 
+![PHP](https://img.shields.io/badge/PHP-8.5+-777BB4?logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-Framework-FF2D20?logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white)
+![Recommendation System](https://img.shields.io/badge/Recommendation-System-6A5ACD)
+
 ## Tentang Proyek
 
 Sistem Rekomendasi Pemilihan Mobil merupakan aplikasi berbasis web yang dikembangkan sebagai bagian dari skripsi Program Studi Informatika. Aplikasi ini membantu pengguna menemukan mobil yang sesuai dengan kebutuhan dan preferensi mereka menggunakan pendekatan _Knowledge-Based_.
