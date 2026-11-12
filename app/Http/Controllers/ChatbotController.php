@@ -44,27 +44,44 @@ class ChatbotController extends Controller
             . "- Jawab dengan ramah dan ringkas.";
 
         // 4. Kirim ke OpenRouter
-        $response = Http::withToken(config('services.openrouter.key'))
-            ->post(config('services.openrouter.endpoint'), [
-                'model' => config('services.openrouter.model'),
-                // ...
-                'messages' => [
-                    ['role' => 'system', 'content' => $systemPrompt],
-                    ['role' => 'user', 'content' => $userMessage],
-                ],
-            ]);
+        // 4. Kirim ke OpenRouter (Menggunakan config() & Timeout)
+        try {
+            $response = Http::withToken(config('services.openrouter.key'))
+                ->timeout(60)          // Tambahkan batas waktu 60 detik
+                ->connectTimeout(15)   // Batas waktu koneksi awal
+                ->withOptions(['verify' => false])
+                ->post(config('services.openrouter.url'), [
+                    'model' => config('services.openrouter.model'),
+                    'messages' => [
+                        ['role' => 'system', 'content' => $systemPrompt],
+                        ['role' => 'user', 'content' => $userMessage],
+                    ],
+                ]);
 
-        if ($response->successful()) {
+            if ($response->successful()) {
+                return response()->json([
+                    'reply' => $response->json('choices.0.message.content'),
+                    'jumlah_mobil_dianalisis' => $mobilRelevan->count(),
+                ]);
+            }
+
             return response()->json([
-                'reply' => $response->json('choices.0.message.content'),
-                'jumlah_mobil_dianalisis' => $mobilRelevan->count(),
-            ]);
-        }
+                'reply' => 'Maaf, server AI merespons dengan error.',
+                'error' => $response->json(),
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'reply' => 'Gagal terhubung ke server AI. (Timeout/Koneksi)',
+                'error' => $e->getMessage(),
+            ], 500);
+        
 
-        return response()->json([
-            'reply' => 'Maaf, asisten AI sedang tidak dapat dihubungi.',
-            'error' => $response->json(),
-        ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'reply' => 'Gagal terhubung ke server AI. (Timeout/Koneksi)',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     private function cariMobilRelevan(string $pesan)
