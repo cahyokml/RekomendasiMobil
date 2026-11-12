@@ -25,3 +25,19 @@ Route::get('/rekomendasi', function () {
 Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
 
 Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
+
+Route::get('/tes-api-ai', function () {
+    // Menembak OpenRouter langsung
+    $response = \Illuminate\Support\Facades\Http::withToken(config('services.openrouter.key'))
+        ->timeout(30)
+        ->withOptions(['verify' => false])
+        ->post('https://openrouter.ai/api/v1/chat/completions', [
+            'model' => config('services.openrouter.model'),
+            'messages' => [['role' => 'user', 'content' => 'Halo']]
+        ]);
+
+    return response()->json([
+        'status_kode' => $response->status(),
+        'respons_dari_openrouter' => $response->json()
+    ]);
+});
