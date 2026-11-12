@@ -165,4 +165,13 @@ class MobilController extends Controller
 
         return view('mobil.hasil', compact('hasil', 'input'));
     }
+    
+    // Tambahkan method ini di dalam class MobilController
+    public function show($id)
+    {
+        $mobil = Mobil::findOrFail($id);
+
+        // Kita arahkan ke view 'mobil.detail'
+        return view('mobil.detail', compact('mobil'));
+    }
 }

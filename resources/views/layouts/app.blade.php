@@ -22,5 +22,8 @@
         @yield('content')
     </main>
 
+    {{-- Chatbot Widget --}}
+    @include('partials.chatbot')
+
 </body>
 </html>
