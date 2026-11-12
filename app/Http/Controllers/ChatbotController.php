@@ -44,10 +44,10 @@ class ChatbotController extends Controller
             . "- Jawab dengan ramah dan ringkas.";
 
         // 4. Kirim ke OpenRouter
-        $response = Http::withToken(env('OPENROUTER_API_KEY'))
-            ->withOptions(['verify' => false])
-            ->post('https://openrouter.ai/api/v1/chat/completions', [
-                'model' => env('OPENROUTER_MODEL'),
+        $response = Http::withToken(config('services.openrouter.key'))
+            ->post(config('services.openrouter.endpoint'), [
+                'model' => config('services.openrouter.model'),
+                // ...
                 'messages' => [
                     ['role' => 'system', 'content' => $systemPrompt],
                     ['role' => 'user', 'content' => $userMessage],
