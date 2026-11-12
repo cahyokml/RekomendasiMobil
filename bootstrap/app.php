@@ -11,9 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        
+        // 1. Percayai semua proxy (EthioDeploy) agar Laravel tahu ini HTTPS
+        $middleware->trustProxies(at: '*');
+
+        // 2. Bebaskan route chatbot dari CSRF
         $middleware->preventRequestForgery(except: [
             'chatbot/send',
         ]);
+        
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
